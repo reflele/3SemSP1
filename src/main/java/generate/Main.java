@@ -45,6 +45,9 @@ public class Main {
             em.persist(address1);
             em.persist(address2);
 
+            em.persist(cityInfo1);
+            em.persist(cityInfo2);
+
             hobby1.addPerson(person1);
             hobby1.addPerson(person2);
             hobby2.addPerson(person1);
@@ -53,13 +56,16 @@ public class Main {
             person2.addPhone(phone2);
 
             person3.addAddress(address1);
-            person2.addAddress(address1);
+            person2.addAddress(address2);
             person1.addAddress(address1);
+
+            address1.addCityInfo(cityInfo1);
+            address2.addCityInfo(cityInfo2);
+
+
 
 
             em.getTransaction().commit();
-
-
 
         } finally {
             em.close();

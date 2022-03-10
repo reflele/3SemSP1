@@ -1,13 +1,12 @@
 package facades;
 
-import entity.Hobby;
-import entity.Person;
-import entity.Phone;
+import entity.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -69,12 +68,59 @@ public class Facade implements IFacade{
 
     @Override
     public List<Person> getPersonsByZip(String zip) {
-        return null;
+        EntityManager em = emf.createEntityManager();
+
+        Long cityInfoId = 0L;
+        List<Person> listOfPersons = new ArrayList<>();
+
+        try{
+
+            TypedQuery<CityInfo> tq = em.createQuery("SELECT c FROM CityInfo c WHERE c.zipCode = :zip",CityInfo.class);
+            tq.setParameter("zip",zip);
+
+            for (Address a : tq.getSingleResult().getAddressSet()) {
+                for (Person p : a.getPersonSet()) {
+                    listOfPersons.add(p);
+                }
+            }
+
+            return listOfPersons;
+
+        } finally {
+            em.close();
+        }
+
+
     }
 
     @Override
     public int personCountByHobby(String hobbyName) {
-        return 0;
+        EntityManager em = emf.createEntityManager();
+
+        Long hobbyId = 0L;
+        int count = 0;
+
+        try{
+
+            TypedQuery<Hobby> tq = em.createQuery("SELECT h FROM Hobby h WHERE h.name = :hobbyName",Hobby.class);
+            tq.setParameter("hobbyName",hobbyName);
+
+            hobbyId = tq.getSingleResult().getId();
+
+            for (Person p : getAllPersons()) {
+                for (Hobby h : p.getHobbySet()) {
+                    if (h.getId() == hobbyId){
+                        count ++;
+                    }
+                }
+            }
+
+            return count;
+
+        } finally {
+            em.close();
+        }
+
     }
 
     @Override

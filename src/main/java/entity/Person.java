@@ -34,6 +34,10 @@ public class Person {
     @ManyToMany(mappedBy ="personSet")
     private Set<Hobby> hobbySet = new HashSet<>();
 
+    public Set<Hobby> getHobbySet() {
+        return hobbySet;
+    }
+
     public String getEmail() {
         return email;
     }

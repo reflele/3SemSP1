@@ -28,6 +28,10 @@ public class Address {
         this.personSet.add(person);
     }
 
+    public Set<Person> getPersonSet() {
+        return personSet;
+    }
+
     public String getStreet() {
         return street;
     }

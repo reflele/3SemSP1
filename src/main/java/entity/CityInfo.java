@@ -20,6 +20,10 @@ public class CityInfo {
         this.addressSet.add(address);
     }
 
+    public Set<Address> getAddressSet() {
+        return addressSet;
+    }
+
     public String getZipCode() {
         return zipCode;
     }
