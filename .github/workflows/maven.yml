@@ -21,8 +21,4 @@ jobs:
           mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
           mysql database: 'sp1' # Optional, default value is "test". The specified database which will be create
           mysql user: 'dev' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-<<<<<<< HEAD
           mysql password: 'ax2'
-=======
-          mysql password: 'ax2'
->>>>>>> 728ecce051a3de9e246fba82ca7d1f72e1d1683a
