@@ -3,6 +3,7 @@ package facades;
 import entity.Person;
 
 import java.util.List;
+import java.util.Set;
 
 public interface IFacade {
 
@@ -10,7 +11,7 @@ public interface IFacade {
 
     Person getPersonInfoByPhoneNum(String phoneNum);
 
-    List<Person> getPersonsByHobby(String hobbyName);
+    Set<Person> getPersonsByHobby(String hobbyName);
 
     List<Person> getPersonsByZip(String zip);
 

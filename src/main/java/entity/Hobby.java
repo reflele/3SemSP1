@@ -16,8 +16,8 @@ public class Hobby {
     @ManyToMany
     @JoinTable(
             name ="person_hobby",
-            joinColumns = @JoinColumn(name="person_id"),
-            inverseJoinColumns = @JoinColumn(name="hobby_id"))
+            joinColumns = @JoinColumn(name="hobby_id"),
+            inverseJoinColumns = @JoinColumn(name="person_id"))
     private Set<Person> personSet = new HashSet<>();
 
 
@@ -26,6 +26,10 @@ public class Hobby {
         person.addHobby(this);
     }
 
+
+    public Set<Person> getPersonSet() {
+        return personSet;
+    }
 
     public String getName() {
         return name;

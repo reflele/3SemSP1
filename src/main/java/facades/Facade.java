@@ -1,11 +1,15 @@
 package facades;
 
+import entity.Hobby;
 import entity.Person;
+import entity.Phone;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Set;
 
 public class Facade implements IFacade{
 
@@ -26,12 +30,41 @@ public class Facade implements IFacade{
 
     @Override
     public Person getPersonInfoByPhoneNum(String phoneNum) {
-        return null;
+
+        EntityManager em = emf.createEntityManager();
+        Long foundId = 0L;
+
+        try{
+            TypedQuery<Phone> tq = em.createQuery("SELECT p FROM Phone p WHERE p.number = :phoneNum",Phone.class);
+            tq.setParameter("phoneNum",phoneNum);
+            foundId = tq.getSingleResult().getPerson().getId();
+
+            return em.createQuery("SELECT p FROM Person p WHERE p.id =:foundId",Person.class)
+                    .setParameter("foundId",foundId)
+                    .getSingleResult();
+        } finally {
+            em.close();
+        }
+
     }
 
     @Override
-    public List<Person> getPersonsByHobby(String hobbyName) {
-        return null;
+    public Set<Person> getPersonsByHobby(String hobbyName) {
+        EntityManager em = emf.createEntityManager();
+        Long foundHobbyId = 0L;
+
+
+        try{
+
+            TypedQuery<Hobby> tq = em.createQuery("SELECT h FROM Hobby h WHERE h.name = :hobbyName",Hobby.class);
+            tq.setParameter("hobbyName",hobbyName);
+
+            return tq.getSingleResult().getPersonSet();
+
+        } finally {
+            em.close();
+        }
+
     }
 
     @Override

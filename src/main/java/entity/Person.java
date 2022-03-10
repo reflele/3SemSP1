@@ -23,7 +23,7 @@ public class Person {
     }
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "person")
     private Set<Phone> phoneSet = new HashSet<>();
 
     public void addPhone(Phone phone){

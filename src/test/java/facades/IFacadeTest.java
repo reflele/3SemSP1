@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,10 +43,25 @@ class IFacadeTest {
 
     @Test
     void getPersonInfoByPhoneNum() {
+        String expected = "1";
+        String actual = facade.getPersonInfoByPhoneNum("54853846").getId().toString();
+
+        assertEquals(expected,actual);
     }
 
     @Test
     void getPersonsByHobby() {
+        List<Long> expected = new ArrayList<>();
+        List<Long> actual = new ArrayList<>();
+
+        expected.add(2L);
+        expected.add(1L);
+
+        for (Person p : facade.getPersonsByHobby("Parkour")) {
+            actual.add(p.getId());
+        }
+
+        assertEquals(expected,actual);
     }
 
     @Test
