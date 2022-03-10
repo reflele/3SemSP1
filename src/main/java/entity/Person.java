@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -81,5 +82,18 @@ public class Person {
 
     public void addHobby(Hobby hobby) {
         this.hobbySet.add(hobby);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(email, person.email) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(address, person.address) && Objects.equals(phoneSet, person.phoneSet) && Objects.equals(hobbySet, person.hobbySet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, firstName, lastName, address, phoneSet, hobbySet);
     }
 }

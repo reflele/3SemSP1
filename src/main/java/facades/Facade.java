@@ -129,8 +129,20 @@ public class Facade implements IFacade{
     }
 
     @Override
-    public void createPerson(Person person) {
+    public Person createPerson(Person person) {
+        EntityManager em = emf.createEntityManager();
 
+        try{
+            em.getTransaction().begin();
+
+            em.persist(person);
+
+            em.getTransaction().commit();
+
+            return person;
+        } finally {
+            em.close();
+        }
     }
 
     @Override

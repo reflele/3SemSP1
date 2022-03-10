@@ -19,7 +19,7 @@ public interface IFacade {
 
     List<String> getAllZipcodes();
 
-    void createPerson(Person person);
+    Person createPerson(Person person);
 
     void editPerson(Person person, Long personId);
 

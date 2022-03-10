@@ -99,6 +99,12 @@ class IFacadeTest {
 
     @Test
     void createPerson() {
+        EntityManager em = emf.createEntityManager();
+
+        Person expected = em.createQuery("SELECT p FROM Person p ORDER BY (p.id) DESC",Person.class).setMaxResults(1).getSingleResult();
+        Person actual = facade.createPerson(new Person("hej@email.dk","Jens","Jensen"));
+
+        assertEquals(expected,actual);
     }
 
     @Test
