@@ -95,6 +95,11 @@ class IFacadeTest {
 
     @Test
     void getAllZipcodes() {
+        List<String> expected = new ArrayList<>();
+        expected.add("2000");
+        expected.add("2791");
+        List<String> actual= facade.getAllZipcodes();
+        assertEquals(expected,actual);
     }
 
     @Test

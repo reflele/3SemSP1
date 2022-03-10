@@ -125,7 +125,21 @@ public class Facade implements IFacade{
 
     @Override
     public List<String> getAllZipcodes() {
-        return null;
+        List<String> allZipCodes= new ArrayList<>();
+        EntityManager em = emf.createEntityManager();
+
+        try{
+            TypedQuery<CityInfo> tq=em.createQuery("SELECT e from CityInfo e", CityInfo.class);
+            for (CityInfo a: tq.getResultList()) {
+                allZipCodes.add(a.getZipCode());
+
+            }
+            return allZipCodes;
+
+        } finally {
+            em.close();
+        }
+
     }
 
     @Override
