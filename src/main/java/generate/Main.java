@@ -1,14 +1,55 @@
 package generate;
 
+import dto.AddressDTO;
+import dto.PersonDTO;
+import dto.PhoneDTO;
 import entity.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Main {
 
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     public static void main(String[] args) {
+
+        Address address1 = new Address("Gade","MoreInfo");
+        Address address2 = new Address("Gade2","MoreInfo2");
+
+        CityInfo cityInfo1 = new CityInfo("1100","By1");
+        CityInfo cityInfo2 = new CityInfo("1200","By2");
+
+        Person person1 = new Person("hej@hej","jens","jensen");
+        Person person2 = new Person("kurt@kurt","kurt","kurtsen");
+
+        Phone phone1 = new Phone("12345678","Nokia");
+        Phone phone2 = new Phone("87654321","Samsung");
+
+        address1.addCityInfo(cityInfo1);
+        address2.addCityInfo(cityInfo2);
+
+        person1.addAddress(address1);
+        person2.addAddress(address2);
+
+        person1.addPhone(phone1);
+        person2.addPhone(phone2);
+
+        AddressDTO addressDTO1 = new AddressDTO(address1);
+        AddressDTO addressDTO2 = new AddressDTO(address2);
+
+        PersonDTO personDTO1 = new PersonDTO(person1);
+        PhoneDTO phoneDTO1 = new PhoneDTO(phone1);
+
+
+        //System.out.println(gson.toJson(addressDTO1));
+        //System.out.println(gson.toJson(addressDTO2));
+        //System.out.println(gson.toJson(personDTO1));
+        System.out.println(gson.toJson(phoneDTO1));
+
     }
 
     public static void generate(EntityManagerFactory emf){

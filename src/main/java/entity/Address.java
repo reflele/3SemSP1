@@ -29,6 +29,18 @@ public class Address {
         this.personSet.add(person);
     }
 
+    public void setPersonSet(Set<Person> personSet) {
+        this.personSet = personSet;
+    }
+
+    public CityInfo getCityInfo() {
+        return cityInfo;
+    }
+
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
+    }
+
     public Set<Person> getPersonSet() {
         return personSet;
     }
@@ -64,4 +76,5 @@ public class Address {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

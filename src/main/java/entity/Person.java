@@ -40,6 +40,26 @@ public class Person {
         return hobbySet;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<Phone> getPhoneSet() {
+        return phoneSet;
+    }
+
+    public void setPhoneSet(Set<Phone> phoneSet) {
+        this.phoneSet = phoneSet;
+    }
+
+    public void setHobbySet(Set<Hobby> hobbySet) {
+        this.hobbySet = hobbySet;
+    }
+
     public String getEmail() {
         return email;
     }
