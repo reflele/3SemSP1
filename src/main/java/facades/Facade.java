@@ -160,12 +160,64 @@ public class Facade implements IFacade{
     }
 
     @Override
-    public void editPerson(Person person, Long personId) {
+    public Person getPersonById(Long personId) {
+        EntityManager em = emf.createEntityManager();
 
+        try{
+            return em.find(Person.class,personId);
+        } finally {
+            em.close();
+        }
     }
 
     @Override
-    public void deletePerson(Long personId) {
+    public Person editPerson(Person person, Long personId) {
+        EntityManager em = emf.createEntityManager();
 
+        Person find = getPersonById(personId);
+        if (!person.getFirstName().equals(null)){
+            find.setFirstName(person.getFirstName());
+        }
+
+        try{
+            em.getTransaction().begin();
+            em.merge(find);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
+        return getPersonById(personId);
+    }
+
+    @Override
+    public boolean deletePerson(Long personId) {
+        EntityManager em = emf.createEntityManager();
+        Person personToDelete;
+        boolean personIsNull = false;
+
+        try{
+            em.getTransaction().begin();
+            Person current = em.merge(getPersonById(personId));
+            em.remove(current);
+            em.getTransaction().commit();
+
+            try{
+                personToDelete = getPersonById(personId);
+
+                if (personToDelete == null){
+                    personIsNull = true;
+                }
+
+            } catch (Exception e){
+                e.printStackTrace();
+
+            }
+
+        } finally {
+            em.close();
+        }
+
+        return personIsNull;
     }
 }

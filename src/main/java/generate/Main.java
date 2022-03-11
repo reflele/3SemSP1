@@ -9,8 +9,9 @@ import javax.persistence.Persistence;
 public class Main {
 
     public static void main(String[] args) {
+    }
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+    public static void generate(EntityManagerFactory emf){
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -53,7 +54,7 @@ public class Main {
             hobby2.addPerson(person1);
 
             person2.addPhone(phone1);
-            person2.addPhone(phone2);
+            person1.addPhone(phone2);
 
             person3.addAddress(address1);
             person2.addAddress(address2);
@@ -70,7 +71,5 @@ public class Main {
         } finally {
             em.close();
         }
-
-
     }
 }

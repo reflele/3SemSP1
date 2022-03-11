@@ -16,6 +16,7 @@ public class Person {
     private String lastName;
 
     @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     Address address;
 
     public void addAddress(Address address){
@@ -24,7 +25,7 @@ public class Person {
     }
 
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", cascade = CascadeType.REMOVE)
     private Set<Phone> phoneSet = new HashSet<>();
 
     public void addPhone(Phone phone){

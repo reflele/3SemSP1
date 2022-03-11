@@ -1,6 +1,7 @@
 package facades;
 
 import entity.Person;
+import generate.Main;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,12 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class IFacadeTest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
-
-    Facade facade;
+    EntityManager em;
+    Facade facade = new Facade();
 
     @BeforeEach
     void setUp() {
-        facade = new Facade();
+        em = emf.createEntityManager();
+        Main.generate(emf);
     }
 
     @AfterEach
@@ -35,8 +37,6 @@ class IFacadeTest {
 
     @Test
     void getAllPersons() {
-        EntityManager em = emf.createEntityManager();
-
         int expected = 3;
         int actual = facade.getAllPersons().size();
 
@@ -104,8 +104,6 @@ class IFacadeTest {
 
     @Test
     void createPerson() {
-        EntityManager em = emf.createEntityManager();
-
         Person expected = em.createQuery("SELECT p FROM Person p ORDER BY (p.id) DESC",Person.class).setMaxResults(1).getSingleResult();
         Person actual = facade.createPerson(new Person("hej@email.dk","Jens","Jensen"));
 
@@ -113,10 +111,27 @@ class IFacadeTest {
     }
 
     @Test
+    void getPersonById(){
+        Long expected = 1L;
+        Long actual = facade.getPersonById(1L).getId();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
     void editPerson() {
+        String expected = "Kurt";
+        Person personToEdit = new Person("rabee@hotmail.dk","Kurt","Abla");
+        String actual = facade.editPerson(personToEdit,1L).getFirstName();
+
+        assertEquals(expected,actual);
     }
 
     @Test
     void deletePerson() {
+        boolean expected = true;
+        boolean actual = facade.deletePerson(2L);
+
+        assertEquals(expected,actual);
     }
 }

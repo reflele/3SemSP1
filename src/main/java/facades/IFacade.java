@@ -21,9 +21,11 @@ public interface IFacade {
 
     Person createPerson(Person person);
 
-    void editPerson(Person person, Long personId);
+    Person getPersonById(Long personId);
 
-    void deletePerson(Long personId);
+    Person editPerson(Person person, Long personId);
+
+    boolean deletePerson(Long personId);
 
 
 }

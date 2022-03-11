@@ -17,6 +17,7 @@ public class Address {
     private Set<Person> personSet = new HashSet<>();
 
     @ManyToOne
+    @JoinColumn(name = "cityInfo_id", referencedColumnName = "id")
     private CityInfo cityInfo;
 
     public void addCityInfo(CityInfo cityInfo){
