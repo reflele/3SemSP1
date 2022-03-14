@@ -29,8 +29,16 @@ public class Main {
         Phone phone1 = new Phone("12345678","Nokia");
         Phone phone2 = new Phone("87654321","Samsung");
 
+
+        Hobby hobby1 = new Hobby("Parkour", "Feels like spiderman");
+        Hobby hobby2 = new Hobby("Ping pong","Inspired by Forrest Gump");
+
         address1.addCityInfo(cityInfo1);
         address2.addCityInfo(cityInfo2);
+
+
+        hobby1.addPerson(person1);
+        hobby2.addPerson(person1);
 
         person1.addAddress(address1);
         person2.addAddress(address2);
@@ -47,8 +55,9 @@ public class Main {
 
         //System.out.println(gson.toJson(addressDTO1));
         //System.out.println(gson.toJson(addressDTO2));
-        //System.out.println(gson.toJson(personDTO1));
-        System.out.println(gson.toJson(phoneDTO1));
+        System.out.println(gson.toJson(personDTO1));
+        //System.out.println(gson.toJson(phoneDTO1));
+
 
     }
 
@@ -62,6 +71,19 @@ public class Main {
 
             Hobby hobby1 = new Hobby("Parkour", "Feels like spiderman");
             Hobby hobby2 = new Hobby("Ping pong","Inspired by Forrest Gump");
+            Hobby hobby3 = new Hobby("Board games","Use a pre-marked board");
+            Hobby hobby4 = new Hobby("Bowling","is a target sport");
+            Hobby hobby5 = new Hobby("Baking","is a method of preparing food");
+            Hobby hobby6 = new Hobby("Card game","is any game using playing cards");
+            Hobby hobby7 = new Hobby("Computer programmering","write and test code");
+            Hobby hobby8 = new Hobby("Cue sport","played with a cue stick");
+            Hobby hobby9 = new Hobby("Pole Dancing","Pole dance combines dance and acrobatics");
+            Hobby hobby10 = new Hobby("Sewing","is the craft of fastening");
+            Hobby hobby11 = new Hobby("Welding"," a fabrication process that joins materials");
+            Hobby hobby12 = new Hobby("Baseball","a game played with a bat");
+            Hobby hobby13 = new Hobby("Basketball","is a game played between two teams");
+            Hobby hobby14 = new Hobby("BMX","racing motocross");
+            Hobby hobby15 = new Hobby("Cycling"," is the use of bicycles for transport");
 
             Phone phone1 = new Phone("54843585","Nokia 3310i");
             Phone phone2 = new Phone("54853846","Nokia 6610");

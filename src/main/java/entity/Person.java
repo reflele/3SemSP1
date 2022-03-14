@@ -93,6 +93,7 @@ public class Person {
     public Person() {
     }
 
+
     public Long getId() {
         return id;
     }
@@ -112,6 +113,7 @@ public class Person {
         Person person = (Person) o;
         return Objects.equals(email, person.email) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(address, person.address) && Objects.equals(phoneSet, person.phoneSet) && Objects.equals(hobbySet, person.hobbySet);
     }
+
 
     @Override
     public int hashCode() {
