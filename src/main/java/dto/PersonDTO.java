@@ -5,7 +5,9 @@ import entity.Hobby;
 import entity.Person;
 import entity.Phone;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class PersonDTO {
@@ -47,6 +49,7 @@ public class PersonDTO {
         }
 
     }
+
 
     public Long getId() {
         return id;

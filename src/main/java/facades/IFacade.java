@@ -7,17 +7,17 @@ import java.util.Set;
 
 public interface IFacade {
 
-    List<Person> getAllPersons();
+    Set<Person> getAllPersons();
 
     Person getPersonInfoByPhoneNum(String phoneNum);
 
     Set<Person> getPersonsByHobby(String hobbyName);
 
-    List<Person> getPersonsByZip(String zip);
+    Set<Person> getPersonsByZip(String zip);
 
     int personCountByHobby(String hobbyName);
 
-    List<String> getAllZipcodes();
+    Set<String> getAllZipcodes();
 
     Person createPerson(Person person);
 

@@ -7,20 +7,27 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Facade implements IFacade{
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+    private String pu;
+    EntityManagerFactory emf;
 
+
+    public Facade(String pu) {
+        this.pu = pu;
+        emf = Persistence.createEntityManagerFactory(pu);
+    }
 
     @Override
-    public List<Person> getAllPersons() {
+    public Set<Person> getAllPersons() {
         EntityManager em = emf.createEntityManager();
 
         try{
-            return em.createQuery("SELECT p FROM Person p",Person.class).getResultList();
+            return new HashSet(em.createQuery("SELECT p FROM Person p",Person.class).getResultList());
         } finally {
             em.close();
         }
@@ -36,7 +43,7 @@ public class Facade implements IFacade{
         try{
             TypedQuery<Phone> tq = em.createQuery("SELECT p FROM Phone p WHERE p.number = :phoneNum",Phone.class);
             tq.setParameter("phoneNum",phoneNum);
-            foundId = tq.getSingleResult().getPerson().getId();
+            foundId = tq.setMaxResults(1).getSingleResult().getPerson().getId();
 
             return em.createQuery("SELECT p FROM Person p WHERE p.id =:foundId",Person.class)
                     .setParameter("foundId",foundId)
@@ -67,7 +74,7 @@ public class Facade implements IFacade{
     }
 
     @Override
-    public List<Person> getPersonsByZip(String zip) {
+    public Set<Person> getPersonsByZip(String zip) {
         EntityManager em = emf.createEntityManager();
 
         Long cityInfoId = 0L;
@@ -84,7 +91,7 @@ public class Facade implements IFacade{
                 }
             }
 
-            return listOfPersons;
+            return new HashSet(listOfPersons);
 
         } finally {
             em.close();
@@ -124,7 +131,7 @@ public class Facade implements IFacade{
     }
 
     @Override
-    public List<String> getAllZipcodes() {
+    public Set<String> getAllZipcodes() {
         List<String> allZipCodes= new ArrayList<>();
         EntityManager em = emf.createEntityManager();
 
@@ -134,7 +141,7 @@ public class Facade implements IFacade{
                 allZipCodes.add(a.getZipCode());
 
             }
-            return allZipCodes;
+            return new HashSet<>(allZipCodes);
 
         } finally {
             em.close();
@@ -221,4 +228,8 @@ public class Facade implements IFacade{
 
         return personIsNull;
     }
+
+
+
+
 }

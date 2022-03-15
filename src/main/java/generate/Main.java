@@ -15,6 +15,9 @@ public class Main {
 
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+
+
+
     public static void main(String[] args) {
 
         Address address1 = new Address("Gade","MoreInfo");
@@ -100,6 +103,7 @@ public class Main {
             em.persist(person2);
             em.persist(person3);
 
+
             em.persist(hobby1);
             em.persist(hobby2);
 
@@ -130,7 +134,6 @@ public class Main {
 
 
             em.getTransaction().commit();
-
         } finally {
             em.close();
         }

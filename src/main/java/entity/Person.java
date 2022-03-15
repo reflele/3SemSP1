@@ -106,17 +106,17 @@ public class Person {
         this.hobbySet.add(hobby);
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return Objects.equals(email, person.email) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(address, person.address) && Objects.equals(phoneSet, person.phoneSet) && Objects.equals(hobbySet, person.hobbySet);
+        return Objects.equals(email, person.email) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName);
     }
-
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, firstName, lastName, address, phoneSet, hobbySet);
+        return Objects.hash(email, firstName, lastName);
     }
 }

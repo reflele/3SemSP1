@@ -9,28 +9,41 @@ import org.junit.jupiter.api.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class IFacadeTest {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+    EntityManagerFactory emf;
     EntityManager em;
-    Facade facade = new Facade();
+    Facade facade;
 
     @BeforeEach
     void setUp() {
+        facade = new Facade("putest");
+        emf = Persistence.createEntityManagerFactory("putest");
         em = emf.createEntityManager();
         Main.generate(emf);
     }
 
     @AfterEach
     void tearDown() {
+
+
+//        try {
+//            em.getTransaction().begin();
+//            Query query = em.createQuery("DELETE FROM Person where id >= 0");
+//            Query query2 = em.createQuery("DELETE FROM Hobby where id >= 0");
+//            int rowCount = query.executeUpdate();
+//            int rowCount2 = query2.executeUpdate();
+//            em.getTransaction().commit();
+//        }finally {
+//            em.close();
+//        }
+//
     }
 
 
@@ -45,42 +58,43 @@ class IFacadeTest {
 
     @Test
     void getPersonInfoByPhoneNum() {
-        String expected = "1";
-        String actual = facade.getPersonInfoByPhoneNum("54853846").getId().toString();
+        String expected = "rabee@hotmail.dk";
+        String actual = facade.getPersonInfoByPhoneNum("54853846").getEmail();
 
         assertEquals(expected,actual);
     }
 
     @Test
     void getPersonsByHobby() {
-        List<Long> expected = new ArrayList<>();
-        List<Long> actual = new ArrayList<>();
+        Set<String> expected = new HashSet<>();
+        Set<String> actual = new HashSet<>();
 
-        expected.add(2L);
-        expected.add(1L);
+        expected.add("peter@live.dk");
+        expected.add("rabee@hotmail.dk");
+
+
 
         for (Person p : facade.getPersonsByHobby("Parkour")) {
-            actual.add(p.getId());
+            actual.add(p.getEmail());
         }
+
+
 
         assertEquals(expected,actual);
     }
 
     @Test
     void getPersonsByZip() {
-        List<Long> expected = new ArrayList<>();
-        List<Long> actual = new ArrayList<>();
+        Set<String> expected = new HashSet<>();
+        Set<String> actual = new HashSet<>();
 
-        expected.add(1L);
-        expected.add(2L);
+        expected.add("mo@yahoo.dk");
+        expected.add("rabee@hotmail.dk");
 
 
         for (Person p : facade.getPersonsByZip("2791")) {
-            actual.add(p.getId());
+            actual.add(p.getEmail());
         }
-
-        Collections.sort(expected);
-        Collections.sort(actual);
 
         assertEquals(expected,actual);
     }
@@ -95,17 +109,18 @@ class IFacadeTest {
 
     @Test
     void getAllZipcodes() {
-        List<String> expected = new ArrayList<>();
+        Set<String> expected = new HashSet<>();
         expected.add("2000");
         expected.add("2791");
-        List<String> actual= facade.getAllZipcodes();
+        Set<String> actual= facade.getAllZipcodes();
         assertEquals(expected,actual);
     }
 
     @Test
     void createPerson() {
-        Person expected = em.createQuery("SELECT p FROM Person p ORDER BY (p.id) DESC",Person.class).setMaxResults(1).getSingleResult();
         Person actual = facade.createPerson(new Person("hej@email.dk","Jens","Jensen"));
+        Person expected = em.createQuery("SELECT p FROM Person p ORDER BY p.id DESC",Person.class).setMaxResults(1).getSingleResult();
+
 
         assertEquals(expected,actual);
     }
