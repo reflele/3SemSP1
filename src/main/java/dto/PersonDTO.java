@@ -5,10 +5,7 @@ import entity.Hobby;
 import entity.Person;
 import entity.Phone;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class PersonDTO {
 
@@ -105,5 +102,18 @@ public class PersonDTO {
 
     public void setHobbyDTOSet(Set<String> hobbyDTOSet) {
         this.hobbyDTOSet = hobbyDTOSet;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonDTO personDTO = (PersonDTO) o;
+        return Objects.equals(email, personDTO.email) && Objects.equals(firstName, personDTO.firstName) && Objects.equals(lastName, personDTO.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, firstName, lastName);
     }
 }

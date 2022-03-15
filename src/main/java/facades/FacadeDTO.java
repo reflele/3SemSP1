@@ -54,23 +54,26 @@ public class FacadeDTO implements IFacadeDTO{
     }
 
     @Override
-    public void createPerson(PersonDTO personDTO) {
-        facade.createPerson(new Person(personDTO.getFirstName(),personDTO.getLastName(),personDTO.getEmail()));
+    public PersonDTO createPerson(PersonDTO personDTO) {
+        Person person = facade.createPerson(new Person(personDTO.getEmail(),personDTO.getFirstName(),personDTO.getLastName()));
+        return new PersonDTO(person.getEmail(),person.getFirstName(), person.getLastName());
     }
 
     @Override
     public PersonDTO getPersonById(Long personId) {
-        return null;
+        return new PersonDTO(facade.getPersonById(personId));
     }
 
     @Override
     public PersonDTO editPerson(PersonDTO personDTO, Long personId) {
-        return null;
+        Person person = new Person(personDTO.getEmail(),personDTO.getFirstName(),personDTO.getLastName());
+
+        return new PersonDTO(facade.editPerson(person,personId));
     }
 
     @Override
     public boolean deletePerson(Long personId) {
-        return false;
+        return facade.deletePerson(personId);
     }
 
 

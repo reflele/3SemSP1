@@ -20,7 +20,7 @@ public interface IFacadeDTO {
 
     Set<String> getAllZipcodes();
 
-    void createPerson(PersonDTO personDTO);
+    PersonDTO createPerson(PersonDTO personDTO);
 
     PersonDTO getPersonById(Long personId);
 

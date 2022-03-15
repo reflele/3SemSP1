@@ -82,11 +82,11 @@ public class Main {
             Hobby hobby8 = new Hobby("Cue sport","played with a cue stick");
             Hobby hobby9 = new Hobby("Pole Dancing","Pole dance combines dance and acrobatics");
             Hobby hobby10 = new Hobby("Sewing","is the craft of fastening");
-            Hobby hobby11 = new Hobby("Welding"," a fabrication process that joins materials");
+            Hobby hobby11 = new Hobby("Welding","a fabrication process that joins materials");
             Hobby hobby12 = new Hobby("Baseball","a game played with a bat");
             Hobby hobby13 = new Hobby("Basketball","is a game played between two teams");
             Hobby hobby14 = new Hobby("BMX","racing motocross");
-            Hobby hobby15 = new Hobby("Cycling"," is the use of bicycles for transport");
+            Hobby hobby15 = new Hobby("Cycling","is the use of bicycles for transport");
 
             Phone phone1 = new Phone("54843585","Nokia 3310i");
             Phone phone2 = new Phone("54853846","Nokia 6610");
